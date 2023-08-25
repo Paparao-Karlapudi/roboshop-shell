@@ -7,7 +7,7 @@ cp ${scriptlocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 echo -e "\e[35m Installing mongod\e[0m"
 yum install mongodb-org -y &>>${LOG}
 
-cho -e "\e[35m Changing localhost to open\e[0m"
+echo -e "\e[35m Changing localhost to open\e[0m"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 
 echo -e "\e[35m Enaling mongod\e[0m"
