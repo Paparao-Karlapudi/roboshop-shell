@@ -8,13 +8,14 @@ echo -e "\e[35m Installing Nodejs \e[0m"
 yum install nodejs -y &>>{LOG}
 
 echo -e "\e[35m Adding User \e[0m"
-useradd roboshop
+useradd  roboshop
 
 echo -e "\e[35m Making directory \e[0m"
-mkdir app
+mkdir -p app
 
 echo -e "\e[35m Downloading catalogue \e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{LOG}
+rm -rf /app/*
 
 cd /app
 
