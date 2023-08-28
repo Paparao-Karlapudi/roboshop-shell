@@ -12,7 +12,7 @@ print_head Updating mongodb listening address
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG}
 status_check
 
-print_head Enaling mongod
+print_head Enabling mongod
 systemctl enable mongod
 
 print_head restarting mongod
