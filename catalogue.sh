@@ -10,7 +10,7 @@ id roboshop
 if [ $? -ne 0];then
 useradd  roboshop
 fi
-
+#check
 print_head Making directory
 mkdir -p /app
 
