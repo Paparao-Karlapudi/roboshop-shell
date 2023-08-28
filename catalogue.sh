@@ -1,18 +1,21 @@
 source common.sh
 
-echo -e "\e[35m Installing Nodejs \e[0m"
+print_head Installing Nodejs
 yum install nodejs -y &>>{LOG}
 status_check
 
 
-echo -e "\e[35m Adding User \e[0m"
+print_head Adding User
+id roboshop
+if [ $? -ne 0];then
 useradd  roboshop
+fi
 
-echo -e "\e[35m Making directory \e[0m"
+print_head Making directory
 mkdir -p /app
 
 
-echo -e "\e[35m Downloading catalogue \e[0m"
+print_head Downloading catalogue
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{LOG}
 rm -rf /app/*
 status_check
@@ -20,44 +23,44 @@ status_check
 
 cd /app
 
-echo -e "\e[35m Extracting catalogue \e[0m"
+print_head Extracting catalogue
 unzip /tmp/catalogue.zip &>>{LOG}
 status_check
 
 cd /app
 
-echo -e "\e[35m Installing dependencies \e[0m"
+print_head Installing dependencies
 npm install &>>{LOG}
 status_check
 
 
 
-echo -e "\e[35m Configuring catalogue service file \e[0m"
+print_head Configuring catalogue service file
 cp ${scriptlocation}/files/catalogue.service /etc/systemd/system/catalogue.service &>>{LOG}
 status_check
 
 
 
-echo -e "\e[35m Enabling Catalogue \e[0m"
+print_head Enabling Catalogue
 systemctl enable catalogue &>>{LOG}
 status_check
 
 
-echo -e "\e[35m Starting Catalogue \e[0m"
+print_head Starting Catalogue
 systemctl start catalogue &>>{LOG}
 status_check
 
 
-echo -e "\e[35m Copying mongod repo file \e[0m"
+print_head Copying mongod repo file
 cp ${scriptlocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>{LOG}
 status_check
 
 
-echo -e "\e[35m Installing mongod client \e[0m"
+print_head Installing mongod client
 yum install mongodb-org-shell -y &>>{LOG}
 status_check
 
 
-echo -e "\e[35m Loading Schema \e[0m"
+print_head Loading Schema
 mongo --host mongodb-dev.pappik.online </app/schema/catalogue.js &>>{LOG}
 status_check

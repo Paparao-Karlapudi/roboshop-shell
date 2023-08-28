@@ -1,17 +1,19 @@
-scriptlocation=$(pwd)
-LOG=/tmp/roboshop.log
+source common.sh
 
-echo -e "\e[35m copying mongod repo\e[0m"
+print_head copying mongod repo
 cp ${scriptlocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
+status_check
 
-echo -e "\e[35m Installing mongod\e[0m"
+print_head Installing mongod
 yum install mongodb-org -y &>>${LOG}
+status_check
 
-echo -e "\e[35m Changing localhost to open\e[0m"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+print_head Updating mongodb listening address
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG}
+status_check
 
-echo -e "\e[35m Enaling mongod\e[0m"
+print_head Enaling mongod
 systemctl enable mongod
 
-echo -e "\e[35m restarting mongod\e[0m"
+print_head restarting mongod
 systemctl start mongod
