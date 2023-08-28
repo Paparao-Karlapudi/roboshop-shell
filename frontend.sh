@@ -1,13 +1,5 @@
-scriptlocation=$(pwd)
-LOG=/tmp/roboshop.log
-status_check() {
- if [ $? -eq 0 ]
- then
-   echo SUCCESS
- else
-   echo FAILURE
- fi
-}
+source common.sh
+
 echo -e "\e[35m Install Nginx\e[0m"
 yum install nginx -y &>>${LOG}
 status_check
