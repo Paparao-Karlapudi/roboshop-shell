@@ -1,5 +1,5 @@
 source common.sh
-
+#
 print_head Install Nginx
 yum install nginx -y &>>${LOG}
 status_check

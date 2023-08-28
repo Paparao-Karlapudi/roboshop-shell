@@ -6,7 +6,7 @@ status_check
 
 
 print_head Adding User
-id roboshop
+id roboshop &>>${LOG}
 if [ $? -ne 0]
 then
   useradd  roboshop
