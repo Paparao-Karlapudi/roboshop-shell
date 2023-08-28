@@ -7,7 +7,7 @@ status_check
 
 print_head Adding User
 id roboshop &>>${LOG}
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
   useradd  roboshop
 fi
