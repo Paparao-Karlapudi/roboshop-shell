@@ -16,7 +16,10 @@ print_head(){
 }
 
 NODEJS(){
-  source common.sh
+
+  print_head "Configuring nodejs repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>{LOG}
+  tatus_check
 
   print_head "Installing Nodejs"
   yum install nodejs -y &>>{LOG}
@@ -59,7 +62,9 @@ NODEJS(){
   cp ${scriptlocation}/files/${component}.service /etc/systemd/system/${component}.service &>>{LOG}
   status_check
 
-
+  print_head "Reloading the service"
+  systemctl daemon-reload &>>{LOG}
+  status_check
 
   print_head "Enabling ${component}"
   systemctl enable ${component} &>>{LOG}
