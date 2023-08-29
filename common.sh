@@ -18,12 +18,16 @@ print_head(){
 NODEJS(){
   source common.sh
 
+  print_head "Setting up Nodejs Repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>{LOG}
+  status_check
+
   print_head "Installing Nodejs"
   yum install nodejs -y &>>{LOG}
   status_check
 
 
-  print_head "Adding ${component}"
+  print_head "Adding user"
   id roboshop &>>${LOG}
   if [ $? -ne 0 ]
   then
@@ -59,7 +63,9 @@ NODEJS(){
   cp ${scriptlocation}/files/${component}.service /etc/systemd/system/${component}.service &>>{LOG}
   status_check
 
-
+  print_head "Loading the service file"
+  systemctl daemon-reload &>>{LOG}
+  status_check
 
   print_head "Enabling ${component}"
   systemctl enable ${component} &>>{LOG}
