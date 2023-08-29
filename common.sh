@@ -16,7 +16,6 @@ print_head(){
 }
 
 NODEJS(){
-  source common.sh
 
   print_head "Setting up Nodejs Repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>{LOG}
