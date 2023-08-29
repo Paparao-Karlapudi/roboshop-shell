@@ -70,7 +70,7 @@ NODEJS(){
   systemctl start ${component} &>>{LOG}
   status_check
 
-
+if [ ${schema_load} == true ]; then
   print_head "Copying mongod repo file"
   cp ${scriptlocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>{LOG}
   status_check
@@ -84,5 +84,5 @@ NODEJS(){
   print_head Loading Schema
   mongo --host mongodb-dev.pappik.online </app/schema/${component}.js &>>{LOG}
   status_check
-
+fi
 }
