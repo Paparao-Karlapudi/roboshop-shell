@@ -35,7 +35,7 @@ NODEJS(){
   mkdir -p /app
 
 
-  print_head "Downloading catalogue"
+  print_head "Downloading {component}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>{LOG}
   rm -rf /app/*
   status_check
