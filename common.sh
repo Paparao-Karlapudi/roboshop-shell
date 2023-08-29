@@ -26,7 +26,7 @@ NODEJS(){
   status_check
 
 
-  print_head "Adding ${component}"
+  print_head "Adding Application user"
   id roboshop &>>${LOG}
   if [ $? -ne 0 ]
   then
