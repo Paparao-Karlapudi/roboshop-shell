@@ -26,13 +26,13 @@ NODEJS(){
   status_check
 
 
-  print_head "Adding user"
+  print_head "Adding Application user"
   id roboshop &>>${LOG}
   if [ $? -ne 0 ]
   then
-    useradd  roboshop
+    useradd  roboshop &>>${LOG}
   fi
-
+  status_check
 
   print_head "Making directory"
   mkdir -p /app
