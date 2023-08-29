@@ -19,7 +19,7 @@ NODEJS(){
 
   print_head "Configuring nodejs repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>{LOG}
-  tatus_check
+  status_check
 
   print_head "Installing Nodejs"
   yum install nodejs -y &>>{LOG}
