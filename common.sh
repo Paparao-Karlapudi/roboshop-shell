@@ -127,11 +127,11 @@ MAVEN(){
   cd /app
 
   print_head "build a package"
-  mvn clean package
+  mvn clean package &>>${LOG}
   status_check
 
   print_head "copy app to App Location"
-  mv target/${component}-1.0.jar ${component}.jar
+  mv target/${component}-1.0.jar ${component}.jar &>>${LOG}
   status_check
 
   SYSTEMD_SETUP
