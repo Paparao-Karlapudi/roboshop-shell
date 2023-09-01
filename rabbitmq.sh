@@ -19,3 +19,11 @@ status_check
 print_head "Start rabbitmq"
 systemctl start rabbitmq-server &>>${LOG}
 status_check
+
+print_head "Adding rabbitmq user"
+rabbitmqctl add_user roboshop roboshop123 &>>${LOG}
+status_check
+
+print_head "Setting rabbitmq permission"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG}
+status_check
