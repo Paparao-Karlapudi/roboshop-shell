@@ -13,7 +13,7 @@ print_head "Configuring YUM Repos rabbitmq"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>${LOG}
 status_check
 
-print_head "Unstall Rabbitmq server"
+print_head "Install Rabbitmq server"
 yum install rabbitmq-server -y &>>${LOG}
 status_check
 
@@ -26,12 +26,11 @@ systemctl start rabbitmq-server &>>${LOG}
 status_check
 
 print_head "Adding rabbitmq user"
- id roboshop &>>${LOG}
+ rabbitmqctl list_users | grep roboshop &>>${LOG}
   if [ $? -ne 0 ]
    then
-   useradd  roboshop
+   rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${LOG}
   fi
-rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password} &>>${LOG}
 status_check
 
 print_head "Setting rabbitmq permission"
